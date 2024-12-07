@@ -2,6 +2,7 @@
 
 import Head from "next/head";
 import * as Sentry from "@sentry/nextjs";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -49,15 +50,18 @@ export default function Page() {
             margin: "18px",
           }}
           onClick={async () => {
-            await Sentry.startSpan({
-              name: 'Example Frontend Span',
-              op: 'test'
-            }, async () => {
-              const res = await fetch("/api/sentry-example-api");
-              if (!res.ok) {
-                throw new Error("Sentry Example Frontend Error");
+            await Sentry.startSpan(
+              {
+                name: "Example Frontend Span",
+                op: "test",
+              },
+              async () => {
+                const res = await fetch("/api/sentry-example-api");
+                if (!res.ok) {
+                  throw new Error("Sentry Example Frontend Error");
+                }
               }
-            });
+            );
           }}
         >
           Throw error!
@@ -65,13 +69,16 @@ export default function Page() {
 
         <p>
           Next, look for the error on the{" "}
-          <a href="https://jsm-d7u.sentry.io/issues/?project=4508422787629056">Issues Page</a>.
+          <Link href="https://jsm-d7u.sentry.io/issues/?project=4508422787629056">
+            Issues Page
+          </Link>
+          .
         </p>
         <p style={{ marginTop: "24px" }}>
           For more information, see{" "}
-          <a href="https://docs.sentry.io/platforms/javascript/guides/nextjs/">
+          <Link href="https://docs.sentry.io/platforms/javascript/guides/nextjs/">
             https://docs.sentry.io/platforms/javascript/guides/nextjs/
-          </a>
+          </Link>
         </p>
       </main>
     </div>

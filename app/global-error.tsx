@@ -1,23 +1,38 @@
-"use client";
-
-import * as Sentry from "@sentry/nextjs";
+import React, { Component, ReactNode } from "react";
 import NextError from "next/error";
-import { useEffect } from "react";
 
-export default function GlobalError({ error }: { error: Error & { digest?: string } }) {
-  useEffect(() => {
-    Sentry.captureException(error);
-  }, [error]);
-
-  return (
-    <html>
-      <body>
-        {/* `NextError` is the default Next.js error page component. Its type
-        definition requires a `statusCode` prop. However, since the App Router
-        does not expose status codes for errors, we simply pass 0 to render a
-        generic error message. */}
-        <NextError statusCode={0} />
-      </body>
-    </html>
-  );
+interface ErrorBoundaryState {
+  hasError: boolean;
+  error?: Error;
 }
+
+class GlobalErrorBoundary extends Component<
+  React.PropsWithChildren<{}>,
+  ErrorBoundaryState
+> {
+  constructor(props: React.PropsWithChildren<{}>) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    // Update state to indicate an error has occurred
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    // Log the error to an error reporting service if desired
+    console.error("Error caught by error boundary:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      const statusCode = this.state.error?.message.includes("404") ? 404 : 500;
+      return <NextError statusCode={statusCode} />;
+    }
+
+    return this.props.children;
+  }
+}
+
+export default GlobalErrorBoundary;

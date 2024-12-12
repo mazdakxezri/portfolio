@@ -1,6 +1,4 @@
-"use client";
-
-import React, { Component, ReactNode } from "react";
+import React, { Component } from "react";
 import NextError from "next/error";
 
 interface ErrorBoundaryState {

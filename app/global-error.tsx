@@ -1,3 +1,5 @@
+"use client";
+
 import React, { Component } from "react";
 import NextError from "next/error";
 

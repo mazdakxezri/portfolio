@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run clean && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "vercel --prod",
-    "clean": "rimraf ./build"
+    "clean": "rimraf .next"
   },
   "dependencies": {
     "@react-three/drei": "^9.119.0",

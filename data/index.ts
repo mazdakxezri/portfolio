@@ -1,7 +1,7 @@
 export const navItems = [
     { name: "About", link: "#about" },
     { name: "Projects", link: "#projects" },
-    { name: "Testimonials", link: "#testimonials" },
+    { name: "Experience", link: "#experience" },
     { name: "Contact", link: "#contact" },
   ];
   
@@ -140,8 +140,8 @@ export const navItems = [
   export const workExperience = [
     {
       id: 1,
-      title: "Frontend Engineer Intern",
-      desc: "Assisted in the development of a web-based platform using React.js, enhancing interactivity.",
+      title: "UI/UX-Focused Frontend Engineer",
+      desc: "Delivered intuitive and accessible interfaces by collaborating closely with designers and applying best practices in CSS, JavaScript, and component-based frameworks.",
       className: "md:col-span-2",
       thumbnail: "/exp1.svg",
     },
